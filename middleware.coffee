@@ -4,6 +4,7 @@ uglify = require 'uglify-js'
 chainer = require 'chainer'
 lager = require 'lager'
 log = new lager 'express-coffee'
+mkdirp = require 'mkdirp'
 require 'colors'
 
 # Get parser and uglifier
@@ -86,7 +87,7 @@ module.exports = (opts, coffee) ->
                   @log '(re)compile complete'
                   cb()
               if not err and stat.isDirectory() then save()
-              else file.mkdir path, 0777, save
+              else mkdirp path, 0777, save
           
           # Continue on errors.
           catch err
